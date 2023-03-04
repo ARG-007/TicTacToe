@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TicTacToe</title>
+    <link rel="stylesheet" href="tictactoe.css"/>
+    <script defer src="ttt.js"></script>
+</head>
+<body>
+    <div id="grid-container">
+        <div id="turn-indicator">
+            <div class="ttt-box" id="turn">
+                <img src="player/X.png" alt="X" class="x-turn">
+                <img src="player/O.png" alt="O" class="back">
+            </div>
+            <div>Turn</div>
+        </div>
+        <div id="tictactoe-grid">
+            <div class="ttt-box" id="0"></div>
+            <div class="ttt-box" id="1"></div>
+            <div class="ttt-box" id="2"></div>
+            <div class="ttt-box" id="3"></div>
+            <div class="ttt-box" id="4"></div>
+            <div class="ttt-box" id="5"></div>
+            <div class="ttt-box" id="6"></div>
+            <div class="ttt-box" id="7"></div>
+            <div class="ttt-box" id="8"></div>
+        </div>
+        <div class="hidden" id="container">
+            <div id="winner">
+                <div class="ttt-box" id="wins"></div>
+                <div>WINS!</div>
+            </div>
+        </div>
+        <div class="hidden" id="draw">DRAW!</div>
+    </div>
+</body>
+</html>
