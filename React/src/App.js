@@ -45,6 +45,8 @@ function Board({ player, squareValues, onPlay }) {
   if (win) {
     [winner, winMoves] = win;
     status = `${winner} WON`;
+  } else if (squareValues.indexOf(null) === -1) {
+    status = "DRAW!";
   } else {
     status = `Next Player : ${player ? 'X' : 'O'}`;
   }
@@ -63,7 +65,7 @@ function Board({ player, squareValues, onPlay }) {
 
   for (let i in winMoves) {
     let winMove = winMoves[i];
-    squares[winMove].style = {"--order":i};
+    squares[winMove].style = { "--order": i };
     squares[winMove].winSquare = 'true';
   }
 
