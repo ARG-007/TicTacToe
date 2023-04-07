@@ -12,11 +12,14 @@ const possibleWinMoves = [
   [6, 7, 8]
 ];
 
-function Square({ value, onSquareClick }) {
+function Square({ id, value, onSquareClick, winSquare, style }) {
   return (
     <button
       className='square'
+      id={`square-${id}`}
       onClick={onSquareClick}
+      winsquare={winSquare}
+      style={style}
     >
       {value}
     </button>
@@ -38,27 +41,37 @@ function Board({ player, squareValues, onPlay }) {
   }
 
 
-  let status, win = isAWinOp(squareValues);
+  let status, win = isAWinOp(squareValues), winner, winMoves = [];
   if (win) {
-    let [winner, winMoves] = win;
+    [winner, winMoves] = win;
     status = `${winner} WON`;
   } else {
     status = `Next Player : ${player ? 'X' : 'O'}`;
+  }
+
+  const squares = squareValues.map(
+    (square, id) => {
+      return {
+        value: square,
+        onSquareClick: () => handleClick(id),
+        key: id,
+        id: id,
+        winSquare: 'false',
+      }
+    }
+  );
+
+  for (let i in winMoves) {
+    let winMove = winMoves[i];
+    squares[winMove].style = {"--order":i};
+    squares[winMove].winSquare = 'true';
   }
 
   return (
     <div className='play'>
       <h1>{status}</h1>
       <div id="board">
-        <Square value={squareValues[0]} onSquareClick={() => handleClick(0)} id="0" />
-        <Square value={squareValues[1]} onSquareClick={() => handleClick(1)} id="1" />
-        <Square value={squareValues[2]} onSquareClick={() => handleClick(2)} id="2" />
-        <Square value={squareValues[3]} onSquareClick={() => handleClick(3)} id="3" />
-        <Square value={squareValues[4]} onSquareClick={() => handleClick(4)} id="4" />
-        <Square value={squareValues[5]} onSquareClick={() => handleClick(5)} id="5" />
-        <Square value={squareValues[6]} onSquareClick={() => handleClick(6)} id="6" />
-        <Square value={squareValues[7]} onSquareClick={() => handleClick(7)} id="7" />
-        <Square value={squareValues[8]} onSquareClick={() => handleClick(8)} id="8" />
+        {squares.map((square) => <Square {...square} />)}
       </div>
     </div>
   )
@@ -69,12 +82,12 @@ export default function Game() {
   const [currentMove, setCurrentMove] = useState(0);
   const currentSquares = history[currentMove];
 
-  const player = move % 2 === 0;
+  const player = currentMove % 2 === 0;
 
   function handlePlay(squares) {
-    const nextHistory = [...history.splice(0,currentMove+1),squares];
+    const nextHistory = [...history.slice(0, currentMove + 1), squares];
     setHistory(nextHistory);
-    setCurrentMove(nextHistory.length-1);
+    setCurrentMove(nextHistory.length - 1);
   }
 
   function goto(move) {

@@ -46,3 +46,18 @@
 
     text-align: center;
 }
+
+.square[winsquare="true"]{
+    /* background-color: blueviolet; */
+    animation: winnerShrink 0.3s ease-in calc(0.05s * var(--order)) forwards;
+}
+
+@keyframes winnerShrink{
+    50%{
+        /* background-color: blueviolet; */
+        transform: scale(75%,75%);
+    }
+    100%{
+        background-color: blueviolet;
+    }
+}
