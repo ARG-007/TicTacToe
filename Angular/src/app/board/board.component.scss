@@ -1,12 +1,25 @@
 main{
     display: grid;
-    grid-template-columns: 200px 200px 200px;
-    grid-gap: 0px;
+    grid-template-columns: 50px 50px 50px;
+    grid-gap: 3px;
     
 }
 
 app-square {
-    border: 1px grey solid;
-    height: 200px;
-    width: 200px;
+    border: 0px grey solid;
+    height: 50px;
+    width:50px;
+}
+
+button{
+    margin-top:0px;
+    border-color: black;
+    margin-bottom: 10px;
+    background-color: blanchedalmond;
+    font-size: large;
+    border-radius: 5px;
+}
+
+#win-announce{
+    position: fixed;
 }
