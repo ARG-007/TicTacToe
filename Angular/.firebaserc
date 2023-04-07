@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "tictactoe-aca35": {
+      "hosting": {
+        "Angular": [
+          "tictactoe-aca35"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "tictactoe-aca35"
+  }
+}
