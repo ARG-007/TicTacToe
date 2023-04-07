@@ -1,0 +1,48 @@
+.square{
+    background-color: beige;
+    font-size: xx-large;
+    font-weight: bolder;
+}
+
+#board{
+    display: grid;
+    grid-template-columns: repeat(3,100px);
+    grid-template-rows: repeat(3,100px);
+
+}
+
+#history::before{
+    content: "HISTORY";
+    font-family:  monospace;
+    font-weight: 900;
+    font-size: 2rem;
+}
+
+#history{
+    margin-left: 10px;
+}
+
+#history ul{
+    list-style: none;
+    padding: 0px;
+}
+
+#history ul li{
+    padding-bottom: 10px;
+}
+
+.play{
+    width: fit-content;
+    background-color: aquamarine;
+    border-radius: 10px 10px 0px 0px;
+}
+
+#game{
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+
+    text-align: center;
+}

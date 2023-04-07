@@ -58,8 +58,8 @@ function played(element) {
 
 }
 
-//This function is less primate than isAWin() but this thing still stinks, but hey we can add moves without
-//much code :|
+//This function is less primate than isAWin() but this thing still stinks,
+// but hey we can add moves without addingmuch code :|
 function isAWinOp() {
     for (let i of possibleWinMoves) {
         let check = xoArray[i[0]];
