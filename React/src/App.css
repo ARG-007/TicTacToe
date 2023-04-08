@@ -1,69 +1,76 @@
-body{
-    background-color: #23272f ;
-    font-family: fantasy;
+:root {
+  --color-1: #23272f;
+  --color-2: #283541;
+  --color-3: #343a46;
+
+  --color-4: #139eca;
+  --color-5: #149bc6;
 }
 
-.square{
-    /* background-color: #343a46; */
-    font-size: xx-large;
-    font-weight: bolder;
-
-    border-radius: 15px 15px 15px 15px;
+body {
+  background-color: #23272f;
+  font-family: fantasy;
 }
 
-#board{
-    display: grid;
-    grid-template-columns: repeat(3,100px);
-    grid-template-rows: repeat(3,100px);
+.square {
+  /* background-color: #343a46; */
+  font-size: xx-large;
+  font-weight: bolder;
 
+  border-radius: 15px 15px 15px 15px;
 }
 
-#history::before{
-    content: "HISTORY";
-    font-family:  monospace;
-    font-weight: 900;
-    font-size: 2rem;
+#board {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
 }
 
-#history{
-    margin-left: 10px;
+#history::before {
+  content: "HISTORY";
+  font-family: monospace;
+  font-weight: 900;
+  font-size: 2rem;
 }
 
-#history ul{
-    list-style: none;
-    padding: 0px;
+#history {
+  margin-left: 10px;
 }
 
-#history ul li{
-    padding-bottom: 10px;
+#history ul {
+  list-style: none;
+  padding: 0px;
 }
 
-
-#game{
-    display: flex;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    
-    width: fit-content;
-    background-color: #139eca;
-    text-align: center;
-    border-radius: 15px 15px 10px 10px;
+#history ul li {
+  padding-bottom: 10px;
 }
 
-.square[winsquare="true"]{
+#game {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 80%;
+  background-color: #139eca;
+  text-align: center;
+  border-radius: 15px 15px 10px 10px;
+}
+
+.square[winsquare="true"] {
+  /* background-color: blueviolet; */
+  animation: winnerShrink 0.3s ease-in calc(0.05s * var(--order)) forwards;
+}
+
+@keyframes winnerShrink {
+  50% {
     /* background-color: blueviolet; */
-    animation: winnerShrink 0.3s ease-in calc(0.05s * var(--order)) forwards;
-}
-
-@keyframes winnerShrink{
-    50%{
-        /* background-color: blueviolet; */
-        transform: scale(75%,75%);
-    }
-    100%{
-        color: #149bc6;
-        background-color: #283541;
-    }
+    transform: scale(75%, 75%);
+  }
+  100% {
+    color: #149bc6;
+    background-color: #283541;
+  }
 }

@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
 
 const possibleWinMoves = [
   [0, 1, 2],
@@ -9,13 +9,13 @@ const possibleWinMoves = [
   [2, 4, 6],
   [1, 4, 7],
   [3, 4, 5],
-  [6, 7, 8]
+  [6, 7, 8],
 ];
 
 function Square({ id, value, onSquareClick, winSquare, style }) {
   return (
     <button
-      className='square'
+      className="square"
       id={`square-${id}`}
       onClick={onSquareClick}
       winsquare={winSquare}
@@ -27,56 +27,55 @@ function Square({ id, value, onSquareClick, winSquare, style }) {
 }
 
 function Board({ player, squareValues, onPlay }) {
-
   function handleClick(id) {
     if (isAWinOp(squareValues) || squareValues[id]) return;
 
     const nextMove = squareValues.slice();
-    if (player)
-      nextMove[id] = "X";
-    else
-      nextMove[id] = "O";
+    if (player) nextMove[id] = "X";
+    else nextMove[id] = "O";
 
     onPlay(nextMove);
   }
 
-
-  let status, win = isAWinOp(squareValues), winner, winMoves = [];
+  let status,
+    win = isAWinOp(squareValues),
+    winner,
+    winMoves = [];
   if (win) {
     [winner, winMoves] = win;
     status = `${winner} WON`;
   } else if (squareValues.indexOf(null) === -1) {
     status = "DRAW!";
   } else {
-    status = `Next Player : ${player ? 'X' : 'O'}`;
+    status = `Next Player : ${player ? "X" : "O"}`;
   }
 
-  const squares = squareValues.map(
-    (square, id) => {
-      return {
-        value: square,
-        onSquareClick: () => handleClick(id),
-        key: id,
-        id: id,
-        winSquare: 'false',
-      }
-    }
-  );
+  const squares = squareValues.map((square, id) => {
+    return {
+      value: square,
+      onSquareClick: () => handleClick(id),
+      key: id,
+      id: id,
+      winSquare: "false",
+    };
+  });
 
   for (let i in winMoves) {
     let winMove = winMoves[i];
     squares[winMove].style = { "--order": i };
-    squares[winMove].winSquare = 'true';
+    squares[winMove].winSquare = "true";
   }
 
   return (
-    <div className='play'>
+    <div className="play">
       <h1>{status}</h1>
       <div id="board">
-        {squares.map((square) => <Square {...square} />)}
+        {squares.map((square) => (
+          <Square {...square} />
+        ))}
       </div>
     </div>
-  )
+  );
 }
 
 export default function Game() {
@@ -96,22 +95,30 @@ export default function Game() {
     setCurrentMove(move);
   }
 
-  const moves = history.map(
-    (squareValues, move) => {
-      let des;
-      if (move > 0) {
-        des = `Goto Move ${move}`;
-      } else {
-        des = "Reset Game";
-      }
-      return <li key={squareValues}><button onClick={() => goto(move)}>{des}</button></li>;
+  const moves = history.map((squareValues, move) => {
+    let des;
+    if (move > 0) {
+      des = `Goto Move ${move}`;
+    } else {
+      des = "Reset Game";
     }
-  );
+    return (
+      <li key={squareValues}>
+        <button onClick={() => goto(move)}>{des}</button>
+      </li>
+    );
+  });
 
   return (
-    <div id='game'>
-      <Board player={player} squareValues={currentSquares} onPlay={handlePlay} />
-      <div id="history"><ul>{moves}</ul></div>
+    <div id="game">
+      <Board
+        player={player}
+        squareValues={currentSquares}
+        onPlay={handlePlay}
+      />
+      <div id="history">
+        <ul>{moves}</ul>
+      </div>
     </div>
   );
 }
