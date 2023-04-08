@@ -1,14 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
     <title>Document</title>
-</head>
-<body>
-    <iframe src="Native/TicTacToe.html" width="400px" height="400px" style="margin: 10px"></iframe>
-    <iframe src="Angular/dist/angular/index.html" width="400px" height="400px" style="margin: 10px"></iframe>
-    <iframe src="React/build/index.html" width="400px" height="400px" style="margin: 10px"></iframe>
-</body>
+  </head>
+  <body>
+    <div class="frames">
+      <iframe
+        id="js"
+        src="Native/TicTacToe.html"
+        width="400px"
+        height="400px"
+        style="margin: 10px"
+      ></iframe>
+      <iframe
+        id="angular"
+        src="Angular/dist/angular/index.html"
+        width="400px"
+        height="400px"
+        style="margin: 10px"
+      ></iframe>
+      <iframe
+        id="react"
+        src="React/dist/index.html"
+        width="400px"
+        height="400px"
+        style="margin: 10px"
+      ></iframe>
+    </div>
+  </body>
 </html>

@@ -1,0 +1,38 @@
+body{
+    background-color: #f7df1e;
+}
+
+
+.frames{
+    position:absolute;
+
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+
+    display: grid;
+
+    grid-template-columns: repeat(3,400px);
+    gap: 20px;
+}
+
+iframe{
+    border-radius: 1rem;
+    border: 0px;
+    /* border: 3px solid  black; */
+
+    --border-shadow:-10px 10px;
+
+}
+
+#js{
+    box-shadow: var(--border-shadow) black;
+}
+
+#angular{
+    box-shadow: var(--border-shadow) #DD0031;
+}
+
+#react{
+    box-shadow: var(--border-shadow) rgb(8, 126, 164);
+}

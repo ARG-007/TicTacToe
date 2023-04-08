@@ -67,14 +67,14 @@ function Board({ player, squareValues, onPlay }) {
   }
 
   return (
-    <div className="play">
-      <h1>{status}</h1>
+    <>
+      <div className="title" id="status">{status}</div>
       <div id="board">
         {squares.map((square) => (
           <Square {...square} />
         ))}
       </div>
-    </div>
+    </>
   );
 }
 
@@ -103,9 +103,7 @@ export default function Game() {
       des = "Reset Game";
     }
     return (
-      <li key={squareValues}>
-        <button onClick={() => goto(move)}>{des}</button>
-      </li>
+        <button key={squareValues} onClick={() => goto(move)}>{des}</button>
     );
   });
 
@@ -117,7 +115,8 @@ export default function Game() {
         onPlay={handlePlay}
       />
       <div id="history">
-        <ul>{moves}</ul>
+        <span className="title" id="title">History</span>
+        <div id="moves">{moves}</div>
       </div>
     </div>
   );
