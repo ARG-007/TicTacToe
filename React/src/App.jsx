@@ -47,7 +47,7 @@ function Board({ player, squareValues, onPlay }) {
   } else if (squareValues.indexOf(null) === -1) {
     status = "DRAW!";
   } else {
-    status = `Next Player : ${player ? "X" : "O"}`;
+    status = `Player : ${player ? "X" : "O"}`;
   }
 
   const squares = squareValues.map((square, id) => {
@@ -98,7 +98,7 @@ export default function Game() {
   const moves = history.map((squareValues, move) => {
     let des;
     if (move > 0) {
-      des = `Goto Move ${move}`;
+      des = `Move ${move}`;
     } else {
       des = "Reset Game";
     }
