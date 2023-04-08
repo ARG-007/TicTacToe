@@ -10,36 +10,32 @@
 }
 
 @media (orientation: landscape) {
-
-  :root{
+  :root {
     --maxVP: 1vh;
   }
 
-  #root{
+  #root {
     height: 80%;
   }
-  
-  #game{
+
+  #game {
     aspect-ratio: 4/3;
     height: 100%;
   }
 }
 
-@media (orientation: portrait){
-
-  :root{
+@media (orientation: portrait) {
+  :root {
     --maxVP: 1vw;
   }
 
-  #root{
+  #root {
     width: 80%;
   }
-  
-  #game{
+
+  #game {
     aspect-ratio: 1;
   }
-
-
 }
 
 body {
@@ -59,10 +55,10 @@ body {
   border-radius: 1rem;
 }
 
-.title{
+.title {
   font-weight: bolder;
-  font-size: calc(5*var(--maxVP));
-  
+  font-size: calc(5 * var(--maxVP));
+
   background-color: var(--color-4);
   color: var(--color-1);
   margin-bottom: 10px;
@@ -73,41 +69,41 @@ body {
   text-align: center;
 }
 
-.square{
-
+.square {
   border-radius: 10px;
-  font-size: calc(15*var(--maxVP));
+  font-size: calc(15 * var(--maxVP));
   font-weight: bolder;
 }
 
-#history #moves button{
+#history button {
+  width: 100%;
   border-radius: 10px;
   box-sizing: border-box;
   border: 2px solid var(--color-4);
-  font-size: calc(4*var(--maxVP));
+  font-size: calc(3 * var(--maxVP));
+  font-weight: bolder;
   background-color: var(--color-1);
   color: var(--color-5);
+  padding: 3px;
 }
 
 #game {
   display: grid;
 
-  grid-template-areas: 
-  "stat stat stat . hist"
-  "game game game . hist"
-  "game game game . hist"
-  "game game game . hist"
-  ;
+  grid-template-areas:
+    "stat stat hisb hisb hisb"
+    "game game game . hist"
+    "game game game . hist"
+    "game game game . hist";
 
-  gap:3px;
-  grid-template-rows: 10% repeat(3,30%);
-  grid-template-columns: repeat(3,25%) 5px auto;
+  gap: 3px;
+  grid-template-rows: 10% repeat(3, 30%);
+  grid-template-columns: repeat(3, 25%) 3px auto;
   place-items: center;
 }
 
-#status{
+#status {
   grid-area: stat;
-  grid-column: 1/4;
 }
 
 #board {
@@ -118,47 +114,59 @@ body {
 
   gap: 5px;
   width: 100%;
-
 }
 
-#history{
-  width: 100%;
-  grid-area: hist;
+#histBar {
+  grid-area: hisb;
   display: grid;
-  grid-template-rows: subgrid;
-  grid-template-columns: subgrid;
-  justify-items: center;
+  grid-template-columns: 25% 25% auto;
 
+  place-items: center;
 }
 
-#history #title{
-  align-self: center;
-  grid-row: 1/2;
+#histBar button {
+  width: 90%;
+  height: 80%;
+  border-radius: 10rem;
+  border: 0px;
+
+  background-color: var(--color-2);
+  color: var(--color-5);
+
+  font-size: calc(2 * var(--maxVP));
+  font-weight: bolder;
 }
 
-#history #moves{
+#histBar button:hover {
+  background-color: var(--color-1);
+}
+
+#histBar button:active {
+  transform: scale(80%, 80%);
+  transition-duration: 100ms;
+}
+
+#history {
+  height: 100%;
+  grid-area: hist;
 
   display: flex;
   flex-direction: column;
-  justify-self: center;
-  grid-row: 2/-1;
-  
-  gap: 3px;
+  place-self: baseline;
+
+  gap: 5px;
   overflow-y: scroll;
-  
-  scrollbar-color: var(--color-4)  var(--color-3);
+
+  scrollbar-color: var(--color-4) var(--color-3);
   scrollbar-width: thin;
 }
 
-#history #moves button:active{
+#history button[isselected="true"] {
   background-color: var(--color-5);
   color: var(--color-1);
 }
 
-
-
 .square[winsquare="true"] {
-
   animation: winnerShrink 0.3s ease-in calc(0.05s * var(--order)) forwards;
 }
 

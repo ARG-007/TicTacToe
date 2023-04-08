@@ -3,7 +3,7 @@ const xoGrid = document.querySelectorAll("#tictactoe-grid .ttt-box");
 const possibleWinMoves = [[0, 1, 2], [0, 3, 6], [0, 4, 8], [2, 5, 8], [2, 4, 6], [1, 4, 7], [3, 4, 5], [6, 7, 8]];
 const turnIndicator = document.getElementById("turn");
 
-let turn = 1;
+let turn = true;
 let playNoMore = 0;
 
 
@@ -12,10 +12,22 @@ xoGrid.forEach(box => box.onclick = function () {
 });
 
 
+function reset(){
+    xoArray.fill(null);
+    xoGrid.forEach(x => {
+        x.replaceChildren();
+        x.setAttribute("rotate",false);
+    });
+    playNoMore = 0;
+    turnIndicator.setAttribute('rotate',false);
+    turn = true;
+    document.querySelector("#wins").replaceChildren();
+    document.querySelector("#container").className = "hidden";
+}
+
+
 function rotate(element) {
-    element.classList.contains("rotate")
-        ? element.classList.remove("rotate")
-        : element.classList.add("rotate");
+    element.setAttribute("rotate",element.getAttribute("rotate")==="true"?false:true);
 }
 
 function create(player) {
@@ -68,52 +80,4 @@ function isAWinOp() {
     }
     return 0;
 }
-
-
-
-//Dont Use this Function, the most primitive method
-/* function isAWin() {
-    for (let i = 0; i < 3; i++) {      
-        for(let j=0; j < 3;j++){
-            let winner = 0;
-            let winnerCircle = [];
-            let curr=xoArray[(i*3)+j];
-
-            if(curr === null)
-                continue;
-            //traverse right to get a winner
-            if(i==0 && j==0){
-                //traverse right from 0 0
-                (winner) || (curr === xoArray[1] && curr === xoArray[2] && (winner = curr,winnerCircle=[0,1,2]));
-                //traverse down from 0 0
-                (winner) || (curr === xoArray[3] && curr === xoArray[6] && (winner = curr,winnerCircle=[0,3,6]));
-                //traverse diagnal from 0 0
-                (winner) || (curr === xoArray[4] && curr === xoArray[8] && (winner = curr,winnerCircle=[0,4,8]));
-
-                //if(winner) return winner;
-            }
-
-            if(i==0 && j==2){
-                //traverse down from 0 3
-                (winner) || (curr === xoArray[5] && curr === xoArray[8] && (winner = curr,winnerCircle=[2,5,8]));
-                //traverse diagnal from 0 3
-                (winner) || (curr === xoArray[4] && curr === xoArray[6] && (winner = curr,winnerCircle=[2,4,6]));
-
-                //if(winner) return winner;
-            }
-
-            //traverse down from 0 2
-            (winner) || ((i==0 && j==1) && curr === xoArray[4] && curr === xoArray[7] && (winner = curr,winnerCircle=[1,4,7]));
-            //traverse right from 1 0
-            (winner) || ((i==1 && j==0) && curr === xoArray[4] && curr === xoArray[5] && (winner = curr,winnerCircle=[3,4,5]));
-            //traverse right from 2 0
-            (winner) || ((i==2 && j==0) && curr === xoArray[7] && curr === xoArray[8] && (winner = curr,winnerCircle=[6,7,8]));
-
-            console.log(winner);
-            if(winner) return {winner,winnerCircle};
-            
-        }
-    }
-    return 0;
-} */
 

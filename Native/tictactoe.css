@@ -11,20 +11,37 @@ img{
 }
 
 #grid-container{
-    display: flex;
-    flex-direction: column;
-    position: fixed;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
     
+    display: grid;
+
+    grid-template-areas: 
+    "T T R"
+    "G G G"
+    "G G G"
+    "G G G"
+    "W W W"
+    ;
+
+    grid-template-columns: repeat(3,60px);
+    
 }
 
 #turn-indicator{
+    grid-area: T;
     display: flex;
     align-items: center;
     margin: 3px;
     margin-bottom: 5px;
+}
+
+#reset{
+    grid-area: R;
+    place-self: center;
+    aspect-ratio: 1;
 }
 
 #turn{
@@ -47,6 +64,7 @@ img{
 }
 
 #tictactoe-grid{
+    grid-area: G;
     display: grid;
     grid-template-columns: 60px 60px 60px;
     gap: 2px;
@@ -71,8 +89,13 @@ img{
     background-color: orange;
 }
 
-.rotate{
+.ttt-box[rotate=true]{
     transform: rotateY(180deg);
+}
+
+#container{
+    grid-area: W;
+
 }
 
 #winner{

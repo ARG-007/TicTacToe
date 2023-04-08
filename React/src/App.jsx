@@ -34,7 +34,7 @@ function Board({ player, squareValues, onPlay }) {
     if (player) nextMove[id] = "X";
     else nextMove[id] = "O";
 
-    onPlay(nextMove);
+    onPlay(nextMove,id);
   }
 
   let status,
@@ -59,7 +59,6 @@ function Board({ player, squareValues, onPlay }) {
       winSquare: "false",
     };
   });
-
   for (let i in winMoves) {
     let winMove = winMoves[i];
     squares[winMove].style = { "--order": i };
@@ -68,7 +67,9 @@ function Board({ player, squareValues, onPlay }) {
 
   return (
     <>
-      <div className="title" id="status">{status}</div>
+      <div className="title" id="status">
+        {status}
+      </div>
       <div id="board">
         {squares.map((square) => (
           <Square {...square} />
@@ -79,14 +80,23 @@ function Board({ player, squareValues, onPlay }) {
 }
 
 export default function Game() {
-  const [history, setHistory] = useState([Array(9).fill(null)]);
+  const [history, setHistory] = useState([
+    { squares: Array(9).fill(null), move: null },
+  ]);
   const [currentMove, setCurrentMove] = useState(0);
-  const currentSquares = history[currentMove];
+  const [doSort,setDoSort] = useState(false);
+
+  const currentSquares = history[currentMove].squares;
 
   const player = currentMove % 2 === 0;
 
-  function handlePlay(squares) {
-    const nextHistory = [...history.slice(0, currentMove + 1), squares];
+  function handlePlay(squares,move) {
+    const nextHistory = [...history.slice(0, currentMove + 1), 
+      {
+        squares:squares,
+        move:move
+      }
+    ];
     setHistory(nextHistory);
     setCurrentMove(nextHistory.length - 1);
   }
@@ -97,13 +107,22 @@ export default function Game() {
 
   const moves = history.map((squareValues, move) => {
     let des;
+    let moveEx = squareValues.move;
+    let row = moveEx/3>>0,col=moveEx%3;
+
     if (move > 0) {
-      des = `Move ${move}`;
+      des = `Move ${move} @ [${row} ${col}]`;
     } else {
       des = "Reset Game";
     }
     return (
-        <button key={squareValues} onClick={() => goto(move)}>{des}</button>
+      <button
+        key={squareValues.squares}
+        onClick={() => goto(move)}
+        isselected={move === currentMove ? "true" :"false"}
+      >
+        {des}
+      </button>
     );
   });
 
@@ -114,10 +133,12 @@ export default function Game() {
         squareValues={currentSquares}
         onPlay={handlePlay}
       />
-      <div id="history">
-        <span className="title" id="title">History</span>
-        <div id="moves">{moves}</div>
+      <div className="title" id="histBar">
+        <button onClick={()=>setDoSort(false)}>ASS</button>
+        <button onClick={()=>setDoSort(true)}>DESS</button>
+        <div>History</div>
       </div>
+      <div id="history">{doSort?moves.reverse():moves}</div>
     </div>
   );
 }
